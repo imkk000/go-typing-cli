@@ -89,7 +89,7 @@ func resetArea(a cursor.Area) string {
 	a.Clear()
 	a.Update(defaultStyle.Sprintf("%-3d %s", wordCount, text))
 	a.StartOfLine()
-	a.Move(5, 0)
+	a.Move(4, 0)
 	x = 0
 	current = 0
 	return text
