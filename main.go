@@ -5,14 +5,18 @@ import (
 	"fmt"
 	"log"
 	"math/rand/v2"
-	"os"
 	"strings"
+
+	_ "embed"
 
 	"atomicgo.dev/color"
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
 )
+
+//go:embed words.json
+var wordsJSON []byte
 
 func main() {
 	textArea := cursor.NewArea()
@@ -58,12 +62,8 @@ func main() {
 }
 
 func randomWords() []string {
-	content, err := os.ReadFile("words.json")
-	if err != nil {
-		log.Fatal("read file:", err)
-	}
 	var data []string
-	if err := json.Unmarshal(content, &data); err != nil {
+	if err := json.Unmarshal(wordsJSON, &data); err != nil {
 		log.Fatal("unmarshal:", err)
 	}
 	var randomWord func() string
